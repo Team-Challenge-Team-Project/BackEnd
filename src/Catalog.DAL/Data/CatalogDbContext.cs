@@ -1,5 +1,5 @@
 ﻿using Catalog.DAL.Data.MappingConfigurations;
-using Catalog.DAL.DomainModels;
+using Catalog.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

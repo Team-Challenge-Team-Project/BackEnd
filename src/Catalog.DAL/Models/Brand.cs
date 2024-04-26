@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalog.DAL.DomainModels
+namespace Catalog.DAL.Models
 {
-    public class Category
+    public class Brand
     {
         public int Id { get; set; }
-        public string Name { get; set; } 
-
-        public ICollection<Product> Products { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalog.DAL.DomainModels
+namespace Catalog.DAL.Models
 {
     public class Product
     {

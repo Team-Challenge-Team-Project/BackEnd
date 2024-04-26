@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalog.DAL.DomainModels
+namespace Catalog.DAL.Models
 {
-    public class Brand
+    public class Size
     {
         public int Id { get; set; }
         public string Name { get; set; }
