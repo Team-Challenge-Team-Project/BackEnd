@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catalog.DAL.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Catalog.DAL.Models
         public bool IsDeleted { get; set; }
         public string MaterialAndFit {  get; set; }
         public int Discount { get; set; }
+        public ProductSex Sex { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int BrandId { get; set; }
