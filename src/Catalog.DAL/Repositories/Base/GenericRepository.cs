@@ -1,13 +1,14 @@
 ﻿using Catalog.DAL.Data;
-using Catalog.DAL.GenericRepository.Interfaces;
+using Catalog.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalog.DAL.GenericRepository.Base
+namespace Catalog.DAL.Re.Base
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
@@ -19,6 +20,31 @@ namespace Catalog.DAL.GenericRepository.Base
            _context = context;
             _dbSet = _context.Set<TEntity>();
         }
+
+        public async Task<IEnumerable<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate,
+            Func<IQueryable<TEntity>,IOrderedQueryable<TEntity>> orderBy=null,
+            int? page = null, int? pageSize = null,
+            params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _dbSet.Where(predicate);
+
+            if (includes != null)
+            {
+                query = includes.Aggregate(query, (current, includeProperties) => current.Include(includeProperties));
+            }
+
+            if (page != null && pageSize != null)
+            {
+                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+            return await query.ToListAsync();
+        }
+
         public IEnumerable<TEntity> GetAll()
         {
             return _dbSet.ToList();
